@@ -1,12 +1,13 @@
 package es.guiguegon.geoapi.main;
 
+import javax.inject.Inject;
+
 import es.guiguegon.geoapi.components.di.scopes.PerActivity;
 import es.guiguegon.geoapi.components.ui.BasePresenter;
 import es.guiguegon.geoapi.models.Location;
 import es.guiguegon.geoapi.tools.Navigator;
 import es.guiguegon.geoapi.usecases.location.GetLocationByNameUseCase;
 import es.guiguegon.geoapi.usecases.location.GetLocationsUseCase;
-import javax.inject.Inject;
 
 /**
  * Created by guiguegon on 12/11/2016.
@@ -34,7 +35,7 @@ public class MainPresenter extends BasePresenter<MainContract.View>
 
     @Override
     public void getLocations() {
-        getLocationsUseCase.execute(this::onLocation, this::onError);
+        getLocationsUseCase.execute(this::onLocation, this::onError, this::onLocationEnd);
     }
 
     @Override
@@ -50,6 +51,11 @@ public class MainPresenter extends BasePresenter<MainContract.View>
     private void onLocation(Location location) {
         checkView();
         view.onLocationReceived(location);
+    }
+
+    private void onLocationEnd() {
+        checkView();
+        view.onLocationEnd();
     }
 
     private void onQuery(Location location) {

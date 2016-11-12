@@ -15,6 +15,8 @@ public interface MainContract extends BaseContract {
         void onLocationReceived(Location location);
 
         void onQueryReceived(Location location);
+
+        void onLocationEnd();
     }
 
     interface ActionListener extends BaseContract.ActionListener {

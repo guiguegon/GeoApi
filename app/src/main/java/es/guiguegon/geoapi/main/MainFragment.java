@@ -3,6 +3,8 @@ package es.guiguegon.geoapi.main;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,18 +14,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import es.guiguegon.geoapi.R;
 import es.guiguegon.geoapi.components.ui.BaseFragment;
 import es.guiguegon.geoapi.exceptions.NetworkConnectionException;
+import es.guiguegon.geoapi.main.adapters.LocationAdapter;
 import es.guiguegon.geoapi.main.di.MainModule;
 import es.guiguegon.geoapi.models.Location;
 import es.guiguegon.geoapi.tools.NetworkManager;
 import es.guiguegon.geoapi.tools.Utils;
-import java.util.ArrayList;
-import java.util.List;
-import javax.inject.Inject;
 import timber.log.Timber;
 
 /**
@@ -44,8 +46,7 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     @BindView(R.id.main_empty_view)
     LinearLayout mainEmptyView;
 
-    List<Location> locationList = new ArrayList<>();
-    List<Location> queryList = new ArrayList<>();
+    private LocationAdapter locationAdapter;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -60,16 +61,28 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
-        ButterKnife.bind(this, view);
-        return view;
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_main, container, false);
+
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mainPresenter.setView(this);
+        setUpAdapter();
+        getLocationList();
+    }
+
+    private void setUpAdapter() {
+        locationAdapter = new LocationAdapter();
+        mainRecyclerView.setAdapter(locationAdapter);
+        mainRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mainRecyclerView.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    private void getLocationList() {
+        mainPresenter.getLocations();
     }
 
     @Override
@@ -92,9 +105,6 @@ public class MainFragment extends BaseFragment implements MainContract.View {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         switch (id) {
             case R.id.action_search:
@@ -113,6 +123,7 @@ public class MainFragment extends BaseFragment implements MainContract.View {
                 mainEditText.setError(null);
                 networkManager.checkConnectivity(getContext());
                 mainPresenter.queryLocationByName(name);
+                locationAdapter.clear();
             } else {
                 mainEditText.setError(getString(R.string.main_location_query_empty));
             }
@@ -128,11 +139,18 @@ public class MainFragment extends BaseFragment implements MainContract.View {
 
     @Override
     public void onLocationReceived(Location location) {
-        locationList.add(location);
+        locationAdapter.addLocation(location);
+    }
+
+    @Override
+    public void onLocationEnd() {
+        if (locationAdapter.isEmpty()) {
+            mainEmptyView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     public void onQueryReceived(Location location) {
-        queryList.add(location);
+        locationAdapter.addLocation(location);
     }
 }

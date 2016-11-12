@@ -60,7 +60,7 @@ dependencies {
     // RxJava
     compile dependencies.rxJava
     compile dependencies.rxAndroid
-    compile dependencies.javaxAnnotation
+    provided dependencies.javaxAnnotation
     // Support Libraries
     compile dependencies.supportDesign
     compile dependencies.supportAnnotations
@@ -69,6 +69,7 @@ dependencies {
     // Net stack
     compile dependencies.retrofit2
     compile dependencies.retrofit2Converter
+    compile dependencies.retrofit2RxAdapter
     compile dependencies.okHttpLoggingInterceptor
     compile dependencies.gson
 

@@ -6,7 +6,7 @@ import es.guiguegon.geoapi.tools.Navigator;
  * Created by guiguegon on 12/11/2016.
  */
 
-public abstract class BasePresenter<T extends BaseContract.View> {
+public class BasePresenter<T extends BaseContract.View> {
 
     protected T view;
     protected Navigator navigator;
@@ -30,5 +30,6 @@ public abstract class BasePresenter<T extends BaseContract.View> {
         }
     }
 
-    public abstract void unsubscribeFromUseCases();
+    public void unsubscribeFromUseCases() {
+    }
 }

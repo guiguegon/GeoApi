@@ -1,12 +1,14 @@
 package es.guiguegon.geoapi.components.di.modules;
 
-import dagger.Module;
-import dagger.Provides;
 import java.util.concurrent.Executor;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
 import javax.inject.Singleton;
+
+import dagger.Module;
+import dagger.Provides;
 import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 
@@ -16,9 +18,6 @@ import rx.android.schedulers.AndroidSchedulers;
 
 @Module
 public class ThreadingModule {
-
-    private ThreadingModule(Builder builder) {
-    }
 
     @Provides
     @Singleton
@@ -31,15 +30,5 @@ public class ThreadingModule {
     @Singleton
     Scheduler provideScheduler() {
         return AndroidSchedulers.mainThread();
-    }
-
-    public static class Builder {
-
-        public Builder() {
-        }
-
-        public ThreadingModule build() {
-            return new ThreadingModule(this);
-        }
     }
 }
