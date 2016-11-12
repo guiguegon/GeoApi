@@ -51,6 +51,8 @@ dependencies {
     // Butterknife
     annotationProcessor dependencies.butterKnifeCompiler
     compile dependencies.butterKnife
+    //Timber
+    compile dependencies.timber
     // Support Libraries
     compile dependencies.supportDesign
     compile dependencies.supportAnnotations
