@@ -12,7 +12,7 @@ import es.guiguegon.geoapi.components.di.components.ActivityComponent;
  * Created by guiguegon on 12/11/2016.
  */
 
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
 
     Unbinder unbinder;
     ActivityComponent activityComponent;

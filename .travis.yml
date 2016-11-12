@@ -3,22 +3,21 @@ jdk:
     - oraclejdk8
 android:
   components:
-    - tools
-    - platform-tools
-    - build-tools-24.0.3
-    - android-24
-    - extra-android-m2repository
-    - extra-google-m2repository
-    - extra-android-support
-    - extra-google-google_play_services
+  - platform-tools
+  - tools
+  - build-tools-24.0.3
+  - android-24
+  - extra-google-google_play_services
+  - extra-android-m2repository
+  - extra-google-m2repository
+  licenses:
+  - android-sdk-license-.+
+  - google-gdk-license-.+
 
 sudo: false
 
-before_install:
+before_script:
     - chmod +x gradlew
-
-before-script:
-  - "android update sdk --no-ui --filter build-tools-24.2.1,android-24,extra-android-m2repository"
 
 cache:
   directories:

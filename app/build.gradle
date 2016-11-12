@@ -32,6 +32,10 @@ android {
         }
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
     packagingOptions {
         exclude 'LICENSE.txt'
         exclude 'META-INF/DEPENDENCIES'
@@ -51,8 +55,12 @@ dependencies {
     // Butterknife
     annotationProcessor dependencies.butterKnifeCompiler
     compile dependencies.butterKnife
-    //Timber
+    // Timber
     compile dependencies.timber
+    // RxJava
+    compile dependencies.rxJava
+    compile dependencies.rxAndroid
+    provided dependencies.javaxAnnotation
     // Support Libraries
     compile dependencies.supportDesign
     compile dependencies.supportAnnotations
@@ -61,6 +69,7 @@ dependencies {
     // Net stack
     compile dependencies.retrofit2
     compile dependencies.retrofit2Converter
+    compile dependencies.retrofit2RxAdapter
     compile dependencies.okHttpLoggingInterceptor
     compile dependencies.gson
 

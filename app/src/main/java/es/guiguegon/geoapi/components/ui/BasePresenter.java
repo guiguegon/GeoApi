@@ -20,6 +20,7 @@ public class BasePresenter<T extends BaseContract.View> {
     }
 
     public void clearView() {
+        unsubscribeFromUseCases();
         view = null;
     }
 
@@ -27,5 +28,8 @@ public class BasePresenter<T extends BaseContract.View> {
         if (view == null) {
             throw new IllegalStateException("view not set");
         }
+    }
+
+    public void unsubscribeFromUseCases() {
     }
 }
