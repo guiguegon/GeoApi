@@ -1,4 +1,4 @@
-package es.guiguegon.geoapi.di.naming;
+package es.guiguegon.geoapi.components.di.naming;
 /**
  * Created by guiguegon on 12/11/2016.
  */

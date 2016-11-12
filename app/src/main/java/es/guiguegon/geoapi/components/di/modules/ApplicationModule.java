@@ -1,9 +1,9 @@
-package es.guiguegon.geoapi.di.modules;
+package es.guiguegon.geoapi.components.di.modules;
 
 import android.content.Context;
 import dagger.Module;
 import dagger.Provides;
-import es.guiguegon.geoapi.app.AndroidApplication;
+import es.guiguegon.geoapi.components.app.AndroidApplication;
 import javax.inject.Singleton;
 
 /**

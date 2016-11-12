@@ -1,12 +1,12 @@
-package es.guiguegon.geoapi.di.modules;
+package es.guiguegon.geoapi.components.di.modules;
 
 import dagger.Module;
 import dagger.Provides;
+import es.guiguegon.geoapi.components.di.scopes.PerActivity;
 import es.guiguegon.geoapi.components.ui.BaseActivity;
-import es.guiguegon.geoapi.di.scopes.PerActivity;
 
 /**
- * Created by Guille on 12/11/2016.
+ * Created by guiguegon on 12/11/2016.
  */
 @Module
 public class ActivityModule {
