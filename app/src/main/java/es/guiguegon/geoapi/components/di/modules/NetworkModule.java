@@ -1,4 +1,4 @@
-package es.guiguegon.geoapi.di.modules;
+package es.guiguegon.geoapi.components.di.modules;
 
 import dagger.Module;
 import dagger.Provides;

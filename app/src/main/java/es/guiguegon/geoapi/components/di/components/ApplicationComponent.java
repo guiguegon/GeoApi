@@ -1,11 +1,11 @@
-package es.guiguegon.geoapi.di.components;
+package es.guiguegon.geoapi.components.di.components;
 
 import android.content.Context;
 import dagger.Component;
-import es.guiguegon.geoapi.app.AndroidApplication;
-import es.guiguegon.geoapi.di.modules.ApplicationModule;
-import es.guiguegon.geoapi.di.modules.NetworkModule;
-import es.guiguegon.geoapi.di.modules.ThreadingModule;
+import es.guiguegon.geoapi.components.app.AndroidApplication;
+import es.guiguegon.geoapi.components.di.modules.ApplicationModule;
+import es.guiguegon.geoapi.components.di.modules.NetworkModule;
+import es.guiguegon.geoapi.components.di.modules.ThreadingModule;
 import javax.inject.Singleton;
 
 /**

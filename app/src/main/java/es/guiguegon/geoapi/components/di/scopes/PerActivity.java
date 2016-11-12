@@ -1,4 +1,4 @@
-package es.guiguegon.geoapi.di.scopes;
+package es.guiguegon.geoapi.components.di.scopes;
 /**
  * Created by guiguegon on 12/11/2016.
  */
