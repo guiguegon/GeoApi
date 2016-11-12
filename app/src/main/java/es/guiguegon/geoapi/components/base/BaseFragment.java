@@ -7,7 +7,7 @@ import android.view.View;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import es.guiguegon.geoapi.di.components.ActivityComponent;
+import es.guiguegon.geoapi.di.components.FeatureComponent;
 
 /**
  * Created by guiguegon on 12/11/2016.
@@ -16,7 +16,7 @@ import es.guiguegon.geoapi.di.components.ActivityComponent;
 public abstract class BaseFragment extends Fragment {
 
     Unbinder unbinder;
-    ActivityComponent activityComponent;
+    FeatureComponent featureComponent;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -26,12 +26,12 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected void injectDependencies() {
-        activityComponent = ((BaseActivity) getActivity()).getComponent();
-        activityComponent.inject(this);
+        featureComponent = ((BaseActivity) getActivity()).getComponent();
+        featureComponent.inject(this);
     }
 
-    protected ActivityComponent getComponent() {
-        return activityComponent;
+    protected FeatureComponent getComponent() {
+        return featureComponent;
     }
 
     @Override

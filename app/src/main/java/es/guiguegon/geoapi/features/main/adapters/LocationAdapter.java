@@ -1,4 +1,4 @@
-package es.guiguegon.geoapi.ui.main.adapters;
+package es.guiguegon.geoapi.features.main.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

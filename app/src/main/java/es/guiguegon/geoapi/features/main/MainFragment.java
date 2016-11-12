@@ -1,4 +1,4 @@
-package es.guiguegon.geoapi.ui.main;
+package es.guiguegon.geoapi.features.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,10 +22,10 @@ import es.guiguegon.geoapi.R;
 import es.guiguegon.geoapi.components.base.BaseFragment;
 import es.guiguegon.geoapi.data.models.Location;
 import es.guiguegon.geoapi.exceptions.NetworkConnectionException;
+import es.guiguegon.geoapi.features.main.adapters.LocationAdapter;
+import es.guiguegon.geoapi.features.main.di.MainModule;
 import es.guiguegon.geoapi.tools.NetworkManager;
 import es.guiguegon.geoapi.tools.Utils;
-import es.guiguegon.geoapi.ui.main.adapters.LocationAdapter;
-import es.guiguegon.geoapi.ui.main.di.MainModule;
 import timber.log.Timber;
 
 /**

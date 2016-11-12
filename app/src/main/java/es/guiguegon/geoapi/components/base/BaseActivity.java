@@ -8,8 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import butterknife.ButterKnife;
 import es.guiguegon.geoapi.components.app.AndroidApplication;
-import es.guiguegon.geoapi.di.components.ActivityComponent;
-import es.guiguegon.geoapi.di.components.DaggerActivityComponent;
+import es.guiguegon.geoapi.di.components.DaggerFeatureComponent;
+import es.guiguegon.geoapi.di.components.FeatureComponent;
 import es.guiguegon.geoapi.di.modules.ActivityModule;
 
 /**
@@ -18,7 +18,7 @@ import es.guiguegon.geoapi.di.modules.ActivityModule;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    ActivityComponent activityComponent;
+    FeatureComponent featureComponent;
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
@@ -27,16 +27,16 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void injectDependencies() {
-        activityComponent = DaggerActivityComponent.builder()
+        featureComponent = DaggerFeatureComponent.builder()
                 .applicationComponent(
                         ((AndroidApplication) (getApplicationContext())).getApplicationComponent())
                 .activityModule(new ActivityModule(this))
                 .build();
-        activityComponent.inject(this);
+        featureComponent.inject(this);
     }
 
-    protected ActivityComponent getComponent() {
-        return activityComponent;
+    protected FeatureComponent getComponent() {
+        return featureComponent;
     }
 
     private FragmentTransaction getFragmentTransaction(FragmentActivity activity,

@@ -1,4 +1,4 @@
-package es.guiguegon.geoapi.ui.main;
+package es.guiguegon.geoapi.features.main;
 
 import javax.inject.Inject;
 
