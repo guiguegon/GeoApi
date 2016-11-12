@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".features.main.MainActivity">
+    tools:context=".features.location.LocationActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -22,11 +22,11 @@
     </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
-        android:id="@+id/content_main"
+        android:id="@+id/content_location"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_location" />
 
 
 </android.support.design.widget.CoordinatorLayout>
