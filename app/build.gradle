@@ -1,0 +1,82 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
+    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
+
+    defaultConfig {
+        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
+
+        applicationId globalConfiguration.getAt("applicationId")
+        versionCode globalConfiguration.getAt("versionCode")
+        versionName globalConfiguration.getAt("versionName")
+        testInstrumentationRunner globalConfiguration.getAt("InstrumentationRunner")
+        testApplicationId globalConfiguration.getAt("applicationId") + ".test"
+
+        vectorDrawables.useSupportLibrary = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+}
+
+dependencies {
+    def dependencies = rootProject.ext.dependencies
+    def testDependencies = rootProject.ext.testDependencies
+
+    // Dagger
+    annotationProcessor dependencies.daggerCompiler
+    compile dependencies.dagger
+    // Butterknife
+    annotationProcessor dependencies.butterKnifeCompiler
+    compile dependencies.butterKnife
+    // Support Libraries
+    compile dependencies.supportDesign
+    compile dependencies.supportAnnotations
+    compile dependencies.supportRecyclerView
+    compile dependencies.supportCardView
+    // Net stack
+    compile dependencies.retrofit2
+    compile dependencies.retrofit2Converter
+    compile dependencies.okHttpLoggingInterceptor
+    compile dependencies.gson
+
+    // Unit Test
+    testCompile testDependencies.junit
+    testCompile testDependencies.mockito
+    testCompile testDependencies.powerMock
+    testCompile testDependencies.powerMockito
+    testCompile testDependencies.powerMockJUnit4
+    testCompile testDependencies.mockwebServer
+
+    // Instrumentation Test
+    androidTestCompile testDependencies.mockito
+    androidTestCompile testDependencies.dexmaker
+    androidTestCompile testDependencies.dexmakerMockito
+    androidTestCompile testDependencies.espresso
+    androidTestCompile testDependencies.espressoIntents
+    androidTestCompile testDependencies.testingRunner
+    androidTestCompile testDependencies.testingRules
+    androidTestCompile testDependencies.supportAnnotations
+}
