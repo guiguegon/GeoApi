@@ -38,8 +38,8 @@ public class MainPresenter extends BasePresenter<MainContract.View>
     }
 
     @Override
-    public void getLocationByName(String name) {
-        getLocationByNameUseCase.setName(name).execute(this::onLocation, this::onError);
+    public void queryLocationByName(String name) {
+        getLocationByNameUseCase.setName(name).execute(this::onQuery, this::onError);
     }
 
     private void onError(Throwable throwable) {
@@ -50,5 +50,10 @@ public class MainPresenter extends BasePresenter<MainContract.View>
     private void onLocation(Location location) {
         checkView();
         view.onLocationReceived(location);
+    }
+
+    private void onQuery(Location location) {
+        checkView();
+        view.onQueryReceived(location);
     }
 }

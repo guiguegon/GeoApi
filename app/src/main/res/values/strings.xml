@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">GeoApi</string>
+
+    <!-- Main View -->
+    <string name="main_location_search">Search</string>
+    <string name="main_location_hint">Write a place …</string>
+    <string name="main_location_empty">You haven\'t search anything yet, take seat and start now!</string>
+
+    <!-- Network dialog -->
+    <string name="ok_button">OK</string>
+    <string name="connectivity_title">Oops …</string>
+    <string name="connectivity_message">Looks like you don\'t have internet!</string>
+    <string name="main_location_query_empty">Empty!</string>
 </resources>

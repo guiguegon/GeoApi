@@ -13,11 +13,13 @@ public interface MainContract extends BaseContract {
         void onError();
 
         void onLocationReceived(Location location);
+
+        void onQueryReceived(Location location);
     }
 
     interface ActionListener extends BaseContract.ActionListener {
         void getLocations();
 
-        void getLocationByName(String name);
+        void queryLocationByName(String name);
     }
 }
