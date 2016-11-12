@@ -3,9 +3,9 @@ package es.guiguegon.geoapi.data.repositories.weather.datasource;
 import javax.inject.Inject;
 
 import es.guiguegon.geoapi.data.net.GeoService;
-import es.guiguegon.geoapi.data.repositories.location.datasource.cloud.LocationCloudDataStore;
-import es.guiguegon.geoapi.data.repositories.location.datasource.db.LocationDBDataStore;
-import es.guiguegon.geoapi.data.repositories.location.datasource.db.LocationDatabaseHelper;
+import es.guiguegon.geoapi.data.repositories.weather.datasource.cloud.WeatherCloudDataStore;
+import es.guiguegon.geoapi.data.repositories.weather.datasource.db.WeatherDBDataStore;
+import es.guiguegon.geoapi.data.repositories.weather.datasource.db.WeatherDatabaseHelper;
 import es.guiguegon.geoapi.tools.serializer.GsonSerializer;
 
 /**
@@ -14,23 +14,23 @@ import es.guiguegon.geoapi.tools.serializer.GsonSerializer;
 
 public class WeatherDataFactory {
 
-    private LocationDatabaseHelper locationDatabaseHelper;
+    private WeatherDatabaseHelper weatherDatabaseHelper;
     private GsonSerializer gsonSerializer;
     private GeoService geoService;
 
     @Inject
-    public WeatherDataFactory(LocationDatabaseHelper locationDatabaseHelper, GeoService geoService,
+    public WeatherDataFactory(WeatherDatabaseHelper weatherDatabaseHelper, GeoService geoService,
                               GsonSerializer gsonSerializer) {
-        this.locationDatabaseHelper = locationDatabaseHelper;
+        this.weatherDatabaseHelper = weatherDatabaseHelper;
         this.gsonSerializer = gsonSerializer;
         this.geoService = geoService;
     }
 
     public WeatherDataStore getDBDataStore() {
-        return new LocationDBDataStore(locationDatabaseHelper, gsonSerializer);
+        return new WeatherDBDataStore(weatherDatabaseHelper, gsonSerializer);
     }
 
     public WeatherDataStore getCloudDataStore() {
-        return new LocationCloudDataStore(geoService);
+        return new WeatherCloudDataStore(geoService);
     }
 }

@@ -1,4 +1,4 @@
-package es.guiguegon.geoapi.data.repositories.location.datasource.db;
+package es.guiguegon.geoapi.data.repositories.weather.datasource.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -22,16 +22,16 @@ import timber.log.Timber;
 /**
  * Helper class to manage SQLite Database
  */
-public class LocationDatabaseHelper extends SQLiteOpenHelper implements DBDatabaseHelper {
+public class WeatherDatabaseHelper extends SQLiteOpenHelper implements DBDatabaseHelper {
 
     /**
      * DB Parameters
      */
-    private static final String TABLE_NAME = "location";
+    private static final String TABLE_NAME = "weathers";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_EXTERNAL_ID = "external_id";
     private static final String COLUMN_DATA = "data";
-    private static final String DATABASE_NAME = "locations.db";
+    private static final String DATABASE_NAME = "weathers.db";
     private static final int DATABASE_VERSION = 1;
     // Database creation sql statement
     private static final String DATABASE_CREATE = "create table "
@@ -49,7 +49,7 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper implements DBDataba
     private SQLiteDatabase database;
 
     @Inject
-    public LocationDatabaseHelper(Context context) {
+    public WeatherDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

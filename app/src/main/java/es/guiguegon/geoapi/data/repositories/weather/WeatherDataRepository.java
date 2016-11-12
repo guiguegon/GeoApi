@@ -1,5 +1,7 @@
 package es.guiguegon.geoapi.data.repositories.weather;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import es.guiguegon.geoapi.data.models.Location;
@@ -21,12 +23,12 @@ public class WeatherDataRepository implements WeatherRepository {
     }
 
     @Override
-    public Observable<Weather> getWeatherByLocation(Location location) {
+    public Observable<List<Weather>> getWeatherByLocation(Location location) {
         return weatherDataFactory.getCloudDataStore().getWeatherByLocation(location);
     }
 
     @Override
-    public Observable<Boolean> storeWeather(Weather weather) {
-        return weatherDataFactory.getDBDataStore().storeWeather(weather);
+    public Observable<Boolean> storeWeather(Location location, List<Weather> weathers) {
+        return weatherDataFactory.getDBDataStore().storeWeather(location, weathers);
     }
 }

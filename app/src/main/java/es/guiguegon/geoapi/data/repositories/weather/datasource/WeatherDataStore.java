@@ -1,5 +1,7 @@
 package es.guiguegon.geoapi.data.repositories.weather.datasource;
 
+import java.util.List;
+
 import es.guiguegon.geoapi.data.models.Location;
 import es.guiguegon.geoapi.data.models.Weather;
 import rx.Observable;
@@ -10,7 +12,7 @@ import rx.Observable;
 
 public interface WeatherDataStore {
 
-    Observable<Weather> getWeatherByLocation(Location location);
+    Observable<List<Weather>> getWeatherByLocation(Location location);
 
-    Observable<Boolean> storeWeather(Weather weather);
+    Observable<Boolean> storeWeather(Location location, List<Weather> weathers);
 }

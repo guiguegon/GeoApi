@@ -2,6 +2,7 @@ package es.guiguegon.geoapi.data.repositories.location.datasource.db;
 
 import java.util.List;
 
+import es.guiguegon.geoapi.data.db.DBDatabaseHelper;
 import es.guiguegon.geoapi.data.models.Location;
 import es.guiguegon.geoapi.data.repositories.location.datasource.LocationDataStore;
 import es.guiguegon.geoapi.tools.serializer.GsonSerializer;
@@ -14,12 +15,12 @@ import rx.Observable;
 
 public class LocationDBDataStore implements LocationDataStore {
 
-    private LocationDatabaseHelper locationDatabaseHelper;
+    private DBDatabaseHelper dbDatabaseHelper;
     private Serializer serializer;
 
-    public LocationDBDataStore(LocationDatabaseHelper locationDatabaseHelper,
-            GsonSerializer gsonSerializer) {
-        this.locationDatabaseHelper = locationDatabaseHelper;
+    public LocationDBDataStore(DBDatabaseHelper dbDatabaseHelper,
+                               GsonSerializer gsonSerializer) {
+        this.dbDatabaseHelper = dbDatabaseHelper;
         this.serializer = gsonSerializer;
     }
 
@@ -32,11 +33,10 @@ public class LocationDBDataStore implements LocationDataStore {
     public Observable<Location> getLocations() {
         return Observable.create(subscriber -> {
             try {
-                List<String> serializedList = locationDatabaseHelper.getAll();
+                List<String> serializedList = dbDatabaseHelper.getAll();
                 if (serializedList != null) {
                     for (String string : serializedList) {
-                        Location location = serializer.deserialize(string, Location.class);
-                        subscriber.onNext(location);
+                        subscriber.onNext(serializer.deserialize(string, Location.class));
                     }
                 }
                 subscriber.onCompleted();
@@ -52,7 +52,8 @@ public class LocationDBDataStore implements LocationDataStore {
             try {
                 String serialized = serializer.serialize(location);
                 if (serialized != null) {
-                    locationDatabaseHelper.storeData(location.getName(), serialized);
+                    long rows = dbDatabaseHelper.storeData(location.getName(), serialized);
+                    subscriber.onNext(rows > 0);
                 }
                 subscriber.onCompleted();
             } catch (Exception e) {

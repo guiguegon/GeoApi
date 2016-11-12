@@ -1,10 +1,11 @@
 package es.guiguegon.geoapi.components.app;
 
 import android.app.Application;
+
 import es.guiguegon.geoapi.BuildConfig;
-import es.guiguegon.geoapi.components.di.components.ApplicationComponent;
-import es.guiguegon.geoapi.components.di.components.DaggerApplicationComponent;
-import es.guiguegon.geoapi.components.di.modules.ApplicationModule;
+import es.guiguegon.geoapi.di.components.ApplicationComponent;
+import es.guiguegon.geoapi.di.components.DaggerApplicationComponent;
+import es.guiguegon.geoapi.di.modules.ApplicationModule;
 import timber.log.Timber;
 
 /**
