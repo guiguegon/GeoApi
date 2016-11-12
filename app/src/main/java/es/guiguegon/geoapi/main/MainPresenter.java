@@ -6,7 +6,7 @@ import es.guiguegon.geoapi.tools.Navigator;
 import javax.inject.Inject;
 
 /**
- * Created by Guille on 12/11/2016.
+ * Created by guiguegon on 12/11/2016.
  */
 
 @PerActivity

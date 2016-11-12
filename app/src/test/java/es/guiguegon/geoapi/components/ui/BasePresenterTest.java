@@ -30,8 +30,14 @@ public class BasePresenterTest {
     }
 
     @Test
-    public void clear_setView() throws Exception {
+    public void test_clearView() throws Exception {
         basePresenter.clearView();
         assertNull(basePresenter.view);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void test_checkView_fail() throws Exception {
+        basePresenter.clearView();
+        basePresenter.checkView();
     }
 }

@@ -11,7 +11,7 @@ import es.guiguegon.geoapi.main.di.MainModule;
 import javax.inject.Inject;
 
 /**
- * Created by Guille on 12/11/2016.
+ * Created by guiguegon on 12/11/2016.
  */
 
 public class MainFragment extends BaseFragment implements MainContract.View {

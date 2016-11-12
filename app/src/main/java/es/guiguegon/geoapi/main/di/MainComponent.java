@@ -8,7 +8,7 @@ import es.guiguegon.geoapi.main.MainFragment;
 import es.guiguegon.geoapi.main.MainPresenter;
 
 /**
- * Created by Guille on 12/11/2016.
+ * Created by guiguegon on 12/11/2016.
  */
 @PerActivity
 @Subcomponent(modules = { ActivityModule.class, MainModule.class })
