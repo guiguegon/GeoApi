@@ -55,8 +55,12 @@ dependencies {
     // Butterknife
     annotationProcessor dependencies.butterKnifeCompiler
     compile dependencies.butterKnife
-    //Timber
+    // Timber
     compile dependencies.timber
+    // RxJava
+    compile dependencies.rxJava
+    compile dependencies.rxAndroid
+    compile dependencies.javaxAnnotation
     // Support Libraries
     compile dependencies.supportDesign
     compile dependencies.supportAnnotations

@@ -15,7 +15,7 @@ import es.guiguegon.geoapi.components.di.modules.ActivityModule;
  * Created by guiguegon on 12/11/2016.
  */
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     ActivityComponent activityComponent;
 

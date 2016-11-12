@@ -2,12 +2,14 @@ package es.guiguegon.geoapi.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import es.guiguegon.geoapi.R;
 import es.guiguegon.geoapi.components.ui.BaseFragment;
 import es.guiguegon.geoapi.main.di.MainModule;
+import es.guiguegon.geoapi.models.Location;
 import javax.inject.Inject;
 
 /**
@@ -46,5 +48,14 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     public void onDestroyView() {
         super.onDestroyView();
         mainPresenter.clearView();
+    }
+
+    @Override
+    public void onError() {
+        Snackbar.make(getView(), "An error occurred", Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onLocationReceived(Location location) {
     }
 }
