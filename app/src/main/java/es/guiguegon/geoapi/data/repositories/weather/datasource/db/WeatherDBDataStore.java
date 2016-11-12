@@ -1,0 +1,64 @@
+package es.guiguegon.geoapi.data.repositories.weather.datasource.db;
+
+import java.util.List;
+
+import es.guiguegon.geoapi.data.models.Location;
+import es.guiguegon.geoapi.data.repositories.location.datasource.LocationDataStore;
+import es.guiguegon.geoapi.data.repositories.location.datasource.db.LocationDatabaseHelper;
+import es.guiguegon.geoapi.tools.serializer.GsonSerializer;
+import es.guiguegon.geoapi.tools.serializer.Serializer;
+import rx.Observable;
+
+/**
+ * Created by guiguegon on 12/11/2016.
+ */
+
+public class WeatherDBDataStore implements LocationDataStore {
+
+    private LocationDatabaseHelper locationDatabaseHelper;
+    private Serializer serializer;
+
+    public WeatherDBDataStore(LocationDatabaseHelper locationDatabaseHelper,
+                              GsonSerializer gsonSerializer) {
+        this.locationDatabaseHelper = locationDatabaseHelper;
+        this.serializer = gsonSerializer;
+    }
+
+    @Override
+    public Observable<Location> getLocationByName(String name) {
+        throw new UnsupportedOperationException("not implemented");
+    }
+
+    @Override
+    public Observable<Location> getLocations() {
+        return Observable.create(subscriber -> {
+            try {
+                List<String> serializedList = locationDatabaseHelper.getAll();
+                if (serializedList != null) {
+                    for (String string : serializedList) {
+                        Location location = serializer.deserialize(string, Location.class);
+                        subscriber.onNext(location);
+                    }
+                }
+                subscriber.onCompleted();
+            } catch (Exception e) {
+                subscriber.onError(e);
+            }
+        });
+    }
+
+    @Override
+    public Observable<Boolean> storeLocation(Location location) {
+        return Observable.create(subscriber -> {
+            try {
+                String serialized = serializer.serialize(location);
+                if (serialized != null) {
+                    locationDatabaseHelper.storeData(location.getName(), serialized);
+                }
+                subscriber.onCompleted();
+            } catch (Exception e) {
+                subscriber.onError(e);
+            }
+        });
+    }
+}

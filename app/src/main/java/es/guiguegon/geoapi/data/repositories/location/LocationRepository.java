@@ -1,6 +1,6 @@
-package es.guiguegon.geoapi.repositories.location;
+package es.guiguegon.geoapi.data.repositories.location;
 
-import es.guiguegon.geoapi.models.Location;
+import es.guiguegon.geoapi.data.models.Location;
 import rx.Observable;
 
 /**
@@ -9,7 +9,7 @@ import rx.Observable;
 
 public interface LocationRepository {
 
-    Observable<Location> getLocation(String name);
+    Observable<Location> getLocationByName(String name);
 
     Observable<Location> getLocations();
 

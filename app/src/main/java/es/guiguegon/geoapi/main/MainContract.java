@@ -1,7 +1,7 @@
 package es.guiguegon.geoapi.main;
 
 import es.guiguegon.geoapi.components.ui.BaseContract;
-import es.guiguegon.geoapi.models.Location;
+import es.guiguegon.geoapi.data.models.Location;
 
 /**
  * Created by guiguegon on 12/11/2016.

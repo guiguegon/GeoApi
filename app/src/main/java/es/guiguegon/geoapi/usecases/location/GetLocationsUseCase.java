@@ -1,10 +1,12 @@
 package es.guiguegon.geoapi.usecases.location;
 
-import es.guiguegon.geoapi.models.Location;
-import es.guiguegon.geoapi.repositories.location.LocationRepository;
-import es.guiguegon.geoapi.usecases.UseCase;
 import java.util.concurrent.Executor;
+
 import javax.inject.Inject;
+
+import es.guiguegon.geoapi.data.models.Location;
+import es.guiguegon.geoapi.data.repositories.location.LocationRepository;
+import es.guiguegon.geoapi.usecases.UseCase;
 import rx.Observable;
 import rx.Scheduler;
 

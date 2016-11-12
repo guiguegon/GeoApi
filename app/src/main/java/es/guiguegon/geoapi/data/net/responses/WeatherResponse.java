@@ -1,7 +1,8 @@
-package es.guiguegon.geoapi.net.responses;
+package es.guiguegon.geoapi.data.net.responses;
 
-import es.guiguegon.geoapi.models.Weather;
 import java.util.List;
+
+import es.guiguegon.geoapi.data.models.Weather;
 
 /**
  * Created by Guille on 12/11/2016.

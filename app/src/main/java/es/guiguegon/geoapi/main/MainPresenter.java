@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import es.guiguegon.geoapi.components.di.scopes.PerActivity;
 import es.guiguegon.geoapi.components.ui.BasePresenter;
-import es.guiguegon.geoapi.models.Location;
+import es.guiguegon.geoapi.data.models.Location;
 import es.guiguegon.geoapi.tools.Navigator;
 import es.guiguegon.geoapi.usecases.location.GetLocationByNameUseCase;
 import es.guiguegon.geoapi.usecases.location.GetLocationsUseCase;

@@ -1,8 +1,9 @@
-package es.guiguegon.geoapi.repositories.location;
+package es.guiguegon.geoapi.data.repositories.location;
 
-import es.guiguegon.geoapi.models.Location;
-import es.guiguegon.geoapi.repositories.location.datasource.LocationDataFactory;
 import javax.inject.Inject;
+
+import es.guiguegon.geoapi.data.models.Location;
+import es.guiguegon.geoapi.data.repositories.location.datasource.LocationDataFactory;
 import rx.Observable;
 
 /**
@@ -19,7 +20,7 @@ public class LocationDataRepository implements LocationRepository {
     }
 
     @Override
-    public Observable<Location> getLocation(String name) {
+    public Observable<Location> getLocationByName(String name) {
         return locationDataFactory.getCloudDataStore().getLocationByName(name);
     }
 

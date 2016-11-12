@@ -1,11 +1,12 @@
-package es.guiguegon.geoapi.repositories.location.datasource;
+package es.guiguegon.geoapi.data.repositories.location.datasource;
 
-import es.guiguegon.geoapi.net.GeoService;
-import es.guiguegon.geoapi.repositories.location.datasource.cloud.LocationCloudDataStore;
-import es.guiguegon.geoapi.repositories.location.datasource.db.LocationDBDataStore;
-import es.guiguegon.geoapi.repositories.location.datasource.db.LocationDatabaseHelper;
-import es.guiguegon.geoapi.tools.serializer.GsonSerializer;
 import javax.inject.Inject;
+
+import es.guiguegon.geoapi.data.net.GeoService;
+import es.guiguegon.geoapi.data.repositories.location.datasource.cloud.LocationCloudDataStore;
+import es.guiguegon.geoapi.data.repositories.location.datasource.db.LocationDBDataStore;
+import es.guiguegon.geoapi.data.repositories.location.datasource.db.LocationDatabaseHelper;
+import es.guiguegon.geoapi.tools.serializer.GsonSerializer;
 
 /**
  * Created by guiguegon on 12/11/2016.

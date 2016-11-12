@@ -12,7 +12,7 @@ import es.guiguegon.geoapi.components.di.modules.ApplicationModule;
 import es.guiguegon.geoapi.components.di.modules.NetworkModule;
 import es.guiguegon.geoapi.components.di.modules.RepositoriesModule;
 import es.guiguegon.geoapi.components.di.modules.ThreadingModule;
-import es.guiguegon.geoapi.repositories.location.LocationRepository;
+import es.guiguegon.geoapi.data.repositories.location.LocationRepository;
 import rx.Scheduler;
 
 /**

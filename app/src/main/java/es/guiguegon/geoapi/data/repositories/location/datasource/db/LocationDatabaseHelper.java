@@ -1,4 +1,4 @@
-package es.guiguegon.geoapi.repositories.location.datasource.db;
+package es.guiguegon.geoapi.data.repositories.location.datasource.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,9 +7,12 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.WorkerThread;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.inject.Inject;
+
 import timber.log.Timber;
 /**
  * Created by guiguegon on 07/10/2016.

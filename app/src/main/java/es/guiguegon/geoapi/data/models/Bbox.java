@@ -1,4 +1,4 @@
-package es.guiguegon.geoapi.models;
+package es.guiguegon.geoapi.data.models;
 
 /**
  * Created by Guille on 12/11/2016.

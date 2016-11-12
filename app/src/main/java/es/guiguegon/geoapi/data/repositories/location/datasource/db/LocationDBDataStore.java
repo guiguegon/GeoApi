@@ -1,10 +1,11 @@
-package es.guiguegon.geoapi.repositories.location.datasource.db;
+package es.guiguegon.geoapi.data.repositories.location.datasource.db;
 
-import es.guiguegon.geoapi.models.Location;
-import es.guiguegon.geoapi.repositories.location.datasource.LocationDataStore;
+import java.util.List;
+
+import es.guiguegon.geoapi.data.models.Location;
+import es.guiguegon.geoapi.data.repositories.location.datasource.LocationDataStore;
 import es.guiguegon.geoapi.tools.serializer.GsonSerializer;
 import es.guiguegon.geoapi.tools.serializer.Serializer;
-import java.util.List;
 import rx.Observable;
 
 /**

@@ -1,10 +1,10 @@
-package es.guiguegon.geoapi.net;
+package es.guiguegon.geoapi.data.net;
 /**
  * Created by guiguegon on 12/11/2016.
  */
 
-import es.guiguegon.geoapi.net.responses.LocationResponse;
-import es.guiguegon.geoapi.net.responses.WeatherResponse;
+import es.guiguegon.geoapi.data.net.responses.LocationResponse;
+import es.guiguegon.geoapi.data.net.responses.WeatherResponse;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;

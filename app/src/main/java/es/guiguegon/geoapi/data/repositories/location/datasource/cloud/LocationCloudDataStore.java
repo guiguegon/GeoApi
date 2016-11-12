@@ -1,8 +1,8 @@
-package es.guiguegon.geoapi.repositories.location.datasource.cloud;
+package es.guiguegon.geoapi.data.repositories.location.datasource.cloud;
 
-import es.guiguegon.geoapi.models.Location;
-import es.guiguegon.geoapi.net.GeoService;
-import es.guiguegon.geoapi.repositories.location.datasource.LocationDataStore;
+import es.guiguegon.geoapi.data.models.Location;
+import es.guiguegon.geoapi.data.net.GeoService;
+import es.guiguegon.geoapi.data.repositories.location.datasource.LocationDataStore;
 import rx.Observable;
 
 /**

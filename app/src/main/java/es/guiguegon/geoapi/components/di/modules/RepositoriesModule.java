@@ -4,9 +4,9 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import es.guiguegon.geoapi.net.GeoService;
-import es.guiguegon.geoapi.repositories.location.LocationDataRepository;
-import es.guiguegon.geoapi.repositories.location.LocationRepository;
+import es.guiguegon.geoapi.data.net.GeoService;
+import es.guiguegon.geoapi.data.repositories.location.LocationDataRepository;
+import es.guiguegon.geoapi.data.repositories.location.LocationRepository;
 import retrofit2.Retrofit;
 
 /**

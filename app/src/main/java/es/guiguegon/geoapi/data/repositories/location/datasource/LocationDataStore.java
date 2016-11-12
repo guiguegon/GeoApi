@@ -1,6 +1,6 @@
-package es.guiguegon.geoapi.repositories.location.datasource;
+package es.guiguegon.geoapi.data.repositories.location.datasource;
 
-import es.guiguegon.geoapi.models.Location;
+import es.guiguegon.geoapi.data.models.Location;
 import rx.Observable;
 
 /**

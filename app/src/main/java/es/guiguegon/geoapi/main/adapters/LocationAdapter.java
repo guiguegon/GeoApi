@@ -12,7 +12,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.guiguegon.geoapi.R;
-import es.guiguegon.geoapi.models.Location;
+import es.guiguegon.geoapi.data.models.Location;
 
 /**
  * Created by Guille on 12/11/2016.
