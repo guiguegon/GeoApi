@@ -1,7 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/location_name_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/spacing_large"
+        android:text="@string/location_name_title"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/location_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/location_name_title"
+        android:layout_toEndOf="@+id/location_name_title"
+        android:layout_toRightOf="@+id/location_name_title"
+        tools:text="Madrid" />
+
+    <TextView
+        android:id="@+id/location_latlng_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/location_name_title"
+        android:padding="@dimen/spacing_large"
+        android:text="@string/location_latlng_title"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/location_latlng"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/location_latlng_title"
+        android:layout_toEndOf="@+id/location_latlng_title"
+        android:layout_toRightOf="@+id/location_latlng_title"
+        tools:text="42.00,1.565" />
+
+</RelativeLayout>

@@ -20,6 +20,8 @@ public interface LocationContract extends BaseContract {
     interface ActionListener extends BaseContract.ActionListener {
         void storeLocation(Location location);
 
+        void storeWeather(Location location, List<Weather> weather);
+
         void getWeatherFromLocation(Location location);
     }
 }

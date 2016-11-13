@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import butterknife.BindView;
 import es.guiguegon.geoapi.R;
 import es.guiguegon.geoapi.components.base.BaseFragment;
 import es.guiguegon.geoapi.data.models.Location;
@@ -27,6 +29,10 @@ public class LocationFragment extends BaseFragment implements LocationContract.V
     LocationPresenter locationPresenter;
     @Inject
     NetworkManager networkManager;
+    @BindView(R.id.location_name)
+    TextView locationName;
+    @BindView(R.id.location_latlng)
+    TextView locationLatLng;
 
     private Location location;
 
@@ -55,9 +61,15 @@ public class LocationFragment extends BaseFragment implements LocationContract.V
             if (null == location) {
                 throw new IllegalStateException("location null");
             }
+            setUpLocation();
             locationPresenter.storeLocation(location);
             locationPresenter.getWeatherFromLocation(location);
         }
+    }
+
+    private void setUpLocation() {
+        locationName.setText(location.getName());
+        locationLatLng.setText(location.getLat() + "," + location.getLng());
     }
 
     @Override
@@ -78,5 +90,6 @@ public class LocationFragment extends BaseFragment implements LocationContract.V
 
     @Override
     public void onWeatherReceived(List<Weather> weather) {
+        locationPresenter.storeWeather(location, weather);
     }
 }

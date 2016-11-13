@@ -21,7 +21,7 @@ public class GetWeatherByLocationUseCase extends UseCase<List<Weather>> {
 
     @Inject
     public GetWeatherByLocationUseCase(Executor threadExecutor, Scheduler postExecutionThread,
-                                       WeatherRepository weatherRepository) {
+            WeatherRepository weatherRepository) {
         super(threadExecutor, postExecutionThread);
         this.weatherRepository = weatherRepository;
     }

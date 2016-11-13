@@ -1,12 +1,12 @@
 package es.guiguegon.geoapi.data.repositories.weather;
 
-import java.util.List;
-
-import javax.inject.Inject;
-
+import android.content.Context;
 import es.guiguegon.geoapi.data.models.Location;
 import es.guiguegon.geoapi.data.models.Weather;
 import es.guiguegon.geoapi.data.repositories.weather.datasource.WeatherDataFactory;
+import es.guiguegon.geoapi.tools.NetworkManager;
+import java.util.List;
+import javax.inject.Inject;
 import rx.Observable;
 
 /**
@@ -16,15 +16,24 @@ import rx.Observable;
 public class WeatherDataRepository implements WeatherRepository {
 
     private WeatherDataFactory weatherDataFactory;
+    private Context context;
+    private NetworkManager networkManager;
 
     @Inject
-    public WeatherDataRepository(WeatherDataFactory weatherDataFactory) {
+    public WeatherDataRepository(Context context, NetworkManager networkManager,
+            WeatherDataFactory weatherDataFactory) {
         this.weatherDataFactory = weatherDataFactory;
+        this.context = context;
+        this.networkManager = networkManager;
     }
 
     @Override
     public Observable<List<Weather>> getWeatherByLocation(Location location) {
-        return weatherDataFactory.getCloudDataStore().getWeatherByLocation(location);
+        if (networkManager.isInternetAvailable(context)) {
+            return weatherDataFactory.getCloudDataStore().getWeatherByLocation(location);
+        } else {
+            return weatherDataFactory.getDBDataStore().getWeatherByLocation(location);
+        }
     }
 
     @Override

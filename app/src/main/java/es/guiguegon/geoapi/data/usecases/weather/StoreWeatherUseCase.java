@@ -32,8 +32,9 @@ public class StoreWeatherUseCase extends UseCase<Boolean> {
         return this;
     }
 
-    public void setWeathers(List<Weather> weathers) {
+    public StoreWeatherUseCase setWeathers(List<Weather> weathers) {
         this.weathers = weathers;
+        return this;
     }
 
     @Override
