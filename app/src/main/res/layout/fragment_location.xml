@@ -40,4 +40,12 @@
         android:layout_toRightOf="@+id/location_latlng_title"
         tools:text="42.00,1.565" />
 
+    <fragment
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:id="@+id/location_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/location_latlng"
+        android:layout_marginTop="@dimen/spacing_xlarge" />
+
 </RelativeLayout>

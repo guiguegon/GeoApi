@@ -26,6 +26,9 @@ public class Location implements Parcelable {
     private String lat;
     private String lng;
 
+    public Location() {
+    }
+
     protected Location(Parcel in) {
         name = in.readString();
         bbox = (Bbox) in.readValue(Bbox.class.getClassLoader());

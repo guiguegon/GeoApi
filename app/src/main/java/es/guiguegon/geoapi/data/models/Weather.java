@@ -2,12 +2,14 @@ package es.guiguegon.geoapi.data.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.maps.android.clustering.ClusterItem;
 
 /**
  * Created by guiguegon on 12/11/2016.
  */
 
-public class Weather implements Parcelable {
+public class Weather implements Parcelable, ClusterItem {
 
     @SuppressWarnings("unused")
     public static final Parcelable.Creator<Weather> CREATOR = new Parcelable.Creator<Weather>() {
@@ -22,13 +24,22 @@ public class Weather implements Parcelable {
         }
     };
     private String temperature;
+    private String lat;
+    private String lng;
 
     protected Weather(Parcel in) {
         temperature = in.readString();
+        lat = in.readString();
+        lng = in.readString();
     }
 
     public String getTemperature() {
         return temperature;
+    }
+
+    @Override
+    public LatLng getPosition() {
+        return new LatLng(Double.valueOf(lat), Double.valueOf(lng));
     }
 
     @Override
@@ -39,30 +50,16 @@ public class Weather implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(temperature);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Weather weather = (Weather) o;
-        return temperature != null ? temperature.equals(weather.temperature)
-                : weather.temperature == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return temperature != null ? temperature.hashCode() : 0;
+        dest.writeString(lat);
+        dest.writeString(lng);
     }
 
     @Override
     public String toString() {
         return "Weather{" +
                 "temperature='" + temperature + '\'' +
+                ", lat='" + lat + '\'' +
+                ", lng='" + lng + '\'' +
                 '}';
     }
 }

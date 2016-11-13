@@ -7,13 +7,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.WorkerThread;
-
+import es.guiguegon.geoapi.data.db.DBDatabaseHelper;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
-
-import es.guiguegon.geoapi.data.db.DBDatabaseHelper;
 import timber.log.Timber;
 /**
  * Created by guiguegon on 07/10/2016.
@@ -77,7 +74,7 @@ public class WeatherDatabaseHelper extends SQLiteOpenHelper implements DBDatabas
      * Store some data in DB using an id (external id) that not will be the primary key
      *
      * @param externalId id
-     * @param data       data
+     * @param data data
      * @return number of affected rows
      */
     @WorkerThread
@@ -86,7 +83,8 @@ public class WeatherDatabaseHelper extends SQLiteOpenHelper implements DBDatabas
         ContentValues values = new ContentValues();
         values.put(COLUMN_DATA, data);
         values.put(COLUMN_EXTERNAL_ID, externalId);
-        long insertId = database.insert(TABLE_NAME, null, values);
+        long insertId = database.insertWithOnConflict(TABLE_NAME, null, values,
+                SQLiteDatabase.CONFLICT_REPLACE);
         close();
         return insertId;
     }

@@ -1,6 +1,9 @@
 package es.guiguegon.geoapi.tools;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.Settings;
 import android.view.WindowManager;
 import android.widget.EditText;
 import timber.log.Timber;
@@ -10,6 +13,9 @@ import timber.log.Timber;
  */
 
 public class Utils {
+
+    public static final int REQUEST_CODE_PERMISSION = 142;
+    public static final int REQUEST_CODE_PERMISSION_SETTINGS = 556;
 
     private Utils() {
     }
@@ -64,14 +70,18 @@ public class Utils {
     }
 
     /**
-     * shows keyboard
+     * Open application settings. It may be used to let the user grant permissions.
+     *
+     * @param activity calling activity
      */
-    public static void showKeyboard(Activity activity) {
-        try {
-            activity.getWindow()
-                    .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        } catch (Exception e) {
-            Timber.wtf(e, "[showKeyboard]");
-        }
+    public static void showAppSettings(Activity activity, int requestCode) {
+        final Intent i = new Intent();
+        i.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        i.addCategory(Intent.CATEGORY_DEFAULT);
+        i.setData(Uri.parse("package:" + activity.getPackageName()));
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        activity.startActivityForResult(i, requestCode);
     }
 }
