@@ -61,4 +61,48 @@ public class Location implements Parcelable {
         dest.writeString(lat);
         dest.writeString(lng);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Location location = (Location) o;
+        if (name != null ? !name.equals(location.name) : location.name != null) {
+            return false;
+        }
+        if (bbox != null ? !bbox.equals(location.bbox) : location.bbox != null) {
+            return false;
+        }
+        if (lat != null ? !lat.equals(location.lat) : location.lat != null) {
+            return false;
+        }
+        return lng != null ? lng.equals(location.lng) : location.lng == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (bbox != null ? bbox.hashCode() : 0);
+        result = 31 * result + (lat != null ? lat.hashCode() : 0);
+        result = 31 * result + (lng != null ? lng.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "name='" + name + '\'' +
+                ", bbox=" + bbox +
+                ", lat='" + lat + '\'' +
+                ", lng='" + lng + '\'' +
+                '}';
+    }
+
+    public boolean hasBbox() {
+        return null != bbox;
+    }
 }

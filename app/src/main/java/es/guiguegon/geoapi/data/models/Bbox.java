@@ -61,4 +61,50 @@ public class Bbox implements Parcelable {
         dest.writeDouble(north);
         dest.writeDouble(west);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Bbox bbox = (Bbox) o;
+        if (Double.compare(bbox.south, south) != 0) {
+            return false;
+        }
+        if (Double.compare(bbox.east, east) != 0) {
+            return false;
+        }
+        if (Double.compare(bbox.north, north) != 0) {
+            return false;
+        }
+        return Double.compare(bbox.west, west) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(south);
+        result = (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(east);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(north);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(west);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Bbox{" +
+                "south=" + south +
+                ", east=" + east +
+                ", north=" + north +
+                ", west=" + west +
+                '}';
+    }
 }
