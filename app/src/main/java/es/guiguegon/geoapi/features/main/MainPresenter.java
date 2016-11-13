@@ -1,13 +1,13 @@
 package es.guiguegon.geoapi.features.main;
 
-import javax.inject.Inject;
-
+import android.app.Activity;
 import es.guiguegon.geoapi.components.base.BasePresenter;
 import es.guiguegon.geoapi.data.models.Location;
 import es.guiguegon.geoapi.data.usecases.location.GetLocationByNameUseCase;
 import es.guiguegon.geoapi.data.usecases.location.GetLocationsUseCase;
 import es.guiguegon.geoapi.di.scopes.PerActivity;
 import es.guiguegon.geoapi.tools.Navigator;
+import javax.inject.Inject;
 
 /**
  * Created by guiguegon on 12/11/2016.
@@ -61,5 +61,9 @@ public class MainPresenter extends BasePresenter<MainContract.View>
     private void onQuery(Location location) {
         checkView();
         view.onQueryReceived(location);
+    }
+
+    public void navigateToLocation(Activity activity, Location location) {
+        navigator.navigateToLocation(activity, location);
     }
 }

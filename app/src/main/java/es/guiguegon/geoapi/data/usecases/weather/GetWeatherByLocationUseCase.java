@@ -1,14 +1,12 @@
 package es.guiguegon.geoapi.data.usecases.weather;
 
-import java.util.List;
-import java.util.concurrent.Executor;
-
-import javax.inject.Inject;
-
 import es.guiguegon.geoapi.data.models.Location;
 import es.guiguegon.geoapi.data.models.Weather;
 import es.guiguegon.geoapi.data.repositories.weather.WeatherRepository;
 import es.guiguegon.geoapi.data.usecases.UseCase;
+import java.util.List;
+import java.util.concurrent.Executor;
+import javax.inject.Inject;
 import rx.Observable;
 import rx.Scheduler;
 
@@ -35,7 +33,7 @@ public class GetWeatherByLocationUseCase extends UseCase<List<Weather>> {
 
     @Override
     protected Observable<List<Weather>> buildUseCaseObservable() {
-        if (location == null) {
+        if (null == location) {
             throw new IllegalStateException("location not set");
         }
         return this.weatherRepository.getWeatherByLocation(location);

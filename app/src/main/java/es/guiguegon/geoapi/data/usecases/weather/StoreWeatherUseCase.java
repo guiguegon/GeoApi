@@ -1,14 +1,12 @@
 package es.guiguegon.geoapi.data.usecases.weather;
 
-import java.util.List;
-import java.util.concurrent.Executor;
-
-import javax.inject.Inject;
-
 import es.guiguegon.geoapi.data.models.Location;
 import es.guiguegon.geoapi.data.models.Weather;
 import es.guiguegon.geoapi.data.repositories.weather.WeatherRepository;
 import es.guiguegon.geoapi.data.usecases.UseCase;
+import java.util.List;
+import java.util.concurrent.Executor;
+import javax.inject.Inject;
 import rx.Observable;
 import rx.Scheduler;
 
@@ -40,10 +38,10 @@ public class StoreWeatherUseCase extends UseCase<Boolean> {
 
     @Override
     protected Observable<Boolean> buildUseCaseObservable() {
-        if (location == null) {
+        if (null == location) {
             throw new IllegalStateException("location not set");
         }
-        if (weathers == null) {
+        if (null == weathers) {
             throw new IllegalStateException("weathers not set");
         }
         return this.weatherRepository.storeWeather(location, weathers);

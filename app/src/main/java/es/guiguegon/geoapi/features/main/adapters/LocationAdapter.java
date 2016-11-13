@@ -5,14 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.guiguegon.geoapi.R;
 import es.guiguegon.geoapi.data.models.Location;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Guille on 12/11/2016.
@@ -31,11 +29,6 @@ public class LocationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.locationItemListener = locationItemListener;
     }
 
-    public void setLocations(List<Location> locations) {
-        this.locations = locations;
-        notifyDataSetChanged();
-    }
-
     public void addLocation(Location location) {
         locations.add(location);
         notifyItemInserted(locations.size());
@@ -46,9 +39,19 @@ public class LocationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         notifyDataSetChanged();
     }
 
+    public List<Location> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
+        notifyDataSetChanged();
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new LocationViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_location, parent, false));
+        return new LocationViewHolder(LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_location, parent, false));
     }
 
     @Override
@@ -60,7 +63,7 @@ public class LocationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private void fillLocation(LocationViewHolder holder, Location location) {
         holder.locationName.setText(location.getName());
         holder.itemView.setOnClickListener(v -> {
-            if (locationItemListener != null) {
+            if (null != locationItemListener) {
                 locationItemListener.onLocationItemClick(location);
             }
         });
@@ -74,7 +77,6 @@ public class LocationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public boolean isEmpty() {
         return getItemCount() == 0;
     }
-
 
     public interface LocationItemListener {
         void onLocationItemClick(Location location);

@@ -1,12 +1,10 @@
 package es.guiguegon.geoapi.data.usecases.location;
 
-import java.util.concurrent.Executor;
-
-import javax.inject.Inject;
-
 import es.guiguegon.geoapi.data.models.Location;
 import es.guiguegon.geoapi.data.repositories.location.LocationRepository;
 import es.guiguegon.geoapi.data.usecases.UseCase;
+import java.util.concurrent.Executor;
+import javax.inject.Inject;
 import rx.Observable;
 import rx.Scheduler;
 
@@ -33,7 +31,7 @@ public class StoreLocationUseCase extends UseCase<Boolean> {
 
     @Override
     protected Observable<Boolean> buildUseCaseObservable() {
-        if (location == null) {
+        if (null == location) {
             throw new IllegalStateException("location not set");
         }
         return this.locationRepository.storeLocation(location);

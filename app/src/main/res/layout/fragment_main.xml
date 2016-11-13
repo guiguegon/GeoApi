@@ -10,20 +10,25 @@
         android:id="@+id/main_search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/main_location_hint" />
+        android:layout_margin="@dimen/spacing_large"
+        android:hint="@string/main_location_hint"
+        android:imeOptions="actionDone" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/main_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:overScrollMode="never"
+        android:padding="@dimen/spacing_large"
         tools:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/main_empty_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone">
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <TextView
             android:layout_width="wrap_content"

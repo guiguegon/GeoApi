@@ -1,13 +1,12 @@
 package es.guiguegon.geoapi.data.repositories.weather.datasource.db;
 
-import java.util.List;
-
 import es.guiguegon.geoapi.data.db.DBDatabaseHelper;
 import es.guiguegon.geoapi.data.models.Location;
 import es.guiguegon.geoapi.data.models.Weather;
 import es.guiguegon.geoapi.data.repositories.weather.datasource.WeatherDataStore;
 import es.guiguegon.geoapi.tools.serializer.GsonSerializer;
 import es.guiguegon.geoapi.tools.serializer.Serializer;
+import java.util.List;
 import rx.Observable;
 
 /**
@@ -30,7 +29,7 @@ public class WeatherDBDataStore implements WeatherDataStore {
         return Observable.create(subscriber -> {
             try {
                 String serialized = dbDatabaseHelper.getData(location.getName());
-                if (serialized != null) {
+                if (null != serialized) {
                     List<Weather> weathers = serializer.deserializeList(serialized, Weather.class);
                     subscriber.onNext(weathers);
                 }
@@ -46,7 +45,7 @@ public class WeatherDBDataStore implements WeatherDataStore {
         return Observable.create(subscriber -> {
             try {
                 String serializedList = serializer.serializeList(weathers);
-                if (serializedList != null) {
+                if (null != serializedList) {
                     long rows = dbDatabaseHelper.storeData(location.getName(), serializedList);
                     subscriber.onNext(rows > 0);
                 }
