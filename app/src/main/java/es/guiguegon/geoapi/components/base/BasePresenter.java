@@ -25,7 +25,7 @@ public class BasePresenter<T extends BaseContract.View> {
     }
 
     protected void checkView() {
-        if (view == null) {
+        if (null == view) {
             throw new IllegalStateException("view not set");
         }
     }

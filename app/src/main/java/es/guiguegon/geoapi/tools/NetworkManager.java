@@ -20,10 +20,16 @@ public class NetworkManager {
     public NetworkManager() {
     }
 
+    private static NetworkInfo getActiveNetwork(Context context) {
+        ConnectivityManager cm =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm != null ? cm.getActiveNetworkInfo() : null;
+    }
+
     /**
      * Checks if there is any active network
      */
-    public static boolean isInternetAvailable(Context context) {
+    public boolean isInternetAvailable(Context context) {
         NetworkInfo activeNetwork = getActiveNetwork(context);
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
@@ -31,15 +37,9 @@ public class NetworkManager {
     /**
      * Checks if the active connection is {@link ConnectivityManager#TYPE_WIFI}
      */
-    public static boolean isWifiConnected(Context context) {
+    public boolean isWifiConnected(Context context) {
         NetworkInfo activeNetwork = getActiveNetwork(context);
         return activeNetwork != null && activeNetwork.getType() == ConnectivityManager.TYPE_WIFI;
-    }
-
-    private static NetworkInfo getActiveNetwork(Context context) {
-        ConnectivityManager cm =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        return cm != null ? cm.getActiveNetworkInfo() : null;
     }
 
     /**

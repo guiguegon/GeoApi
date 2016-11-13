@@ -14,4 +14,6 @@ public interface LocationRepository {
     Observable<Location> getLocations();
 
     Observable<Boolean> storeLocation(Location location);
+
+    Observable<Boolean> deleteLocation(Location location);
 }

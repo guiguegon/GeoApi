@@ -1,8 +1,11 @@
 package es.guiguegon.geoapi.data.repositories.location.datasource.cloud;
 
+import es.guiguegon.geoapi.BuildConfig;
 import es.guiguegon.geoapi.data.models.Location;
 import es.guiguegon.geoapi.data.net.GeoService;
 import es.guiguegon.geoapi.data.repositories.location.datasource.LocationDataStore;
+import java.util.ArrayList;
+import java.util.List;
 import rx.Observable;
 
 /**
@@ -16,7 +19,6 @@ public class LocationCloudDataStore implements LocationDataStore {
     private final static String LANG = "en";
     private final static String IS_NAME_REQUIRED = "true";
     private final static String STYLE = "FULL";
-    private final static String USERNAME = "ilgeonamessample";
 
     private GeoService geoService;
 
@@ -27,7 +29,16 @@ public class LocationCloudDataStore implements LocationDataStore {
     @Override
     public Observable<Location> getLocationByName(String name) {
         return geoService.getLocation(name, MAX_ROWS, START_ROW, LANG, IS_NAME_REQUIRED, STYLE,
-                USERNAME).flatMapIterable((locationResponse) -> locationResponse.getLocation());
+                BuildConfig.API_USERNAME).flatMapIterable((locationResponse) -> {
+            List<Location> locations = locationResponse.getLocation();
+            List<Location> filteredLocations = new ArrayList<>();
+            for (Location location : locations) {
+                if (location.hasBbox()) {
+                    filteredLocations.add(location);
+                }
+            }
+            return filteredLocations;
+        });
     }
 
     @Override
@@ -37,6 +48,11 @@ public class LocationCloudDataStore implements LocationDataStore {
 
     @Override
     public Observable<Boolean> storeLocation(Location location) {
+        throw new UnsupportedOperationException("not implemented");
+    }
+
+    @Override
+    public Observable<Boolean> deleteLocation(Location location) {
         throw new UnsupportedOperationException("not implemented");
     }
 }

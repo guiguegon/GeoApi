@@ -1,6 +1,9 @@
 package es.guiguegon.geoapi.tools;
 
+import android.app.Activity;
+import android.view.WindowManager;
 import android.widget.EditText;
+import timber.log.Timber;
 
 /**
  * Created by Guille on 12/11/2016.
@@ -37,7 +40,7 @@ public class Utils {
      */
     public static boolean isBlank(String str) {
         int strLen;
-        if (str == null || (strLen = str.length()) == 0) {
+        if (null == str || (strLen = str.length()) == 0) {
             return true;
         }
         for (int i = 0; i < strLen; i++) {
@@ -46,5 +49,29 @@ public class Utils {
             }
         }
         return true;
+    }
+
+    /**
+     * Closes keyboard
+     */
+    public static void hideKeyboard(Activity activity) {
+        try {
+            activity.getWindow()
+                    .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        } catch (Exception e) {
+            Timber.wtf(e, "[hideKeyboard]");
+        }
+    }
+
+    /**
+     * shows keyboard
+     */
+    public static void showKeyboard(Activity activity) {
+        try {
+            activity.getWindow()
+                    .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        } catch (Exception e) {
+            Timber.wtf(e, "[showKeyboard]");
+        }
     }
 }

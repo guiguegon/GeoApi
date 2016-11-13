@@ -7,13 +7,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.WorkerThread;
-
+import es.guiguegon.geoapi.data.db.DBDatabaseHelper;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
-
-import es.guiguegon.geoapi.data.db.DBDatabaseHelper;
 import timber.log.Timber;
 /**
  * Created by guiguegon on 07/10/2016.
@@ -77,7 +74,7 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper implements DBDataba
      * Store some data in DB using an id (external id) that not will be the primary key
      *
      * @param externalId id
-     * @param data       data
+     * @param data data
      * @return number of affected rows
      */
     @WorkerThread
@@ -100,7 +97,8 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper implements DBDataba
     @WorkerThread
     public long deleteData(String id) {
         open();
-        long affectedRows = database.delete(TABLE_NAME, COLUMN_EXTERNAL_ID + " = " + id, null);
+        long affectedRows =
+                database.delete(TABLE_NAME, COLUMN_EXTERNAL_ID + "=?", new String[] { id });
         close();
         return affectedRows;
     }

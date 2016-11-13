@@ -2,14 +2,11 @@ package es.guiguegon.geoapi.di.modules;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 import es.guiguegon.geoapi.data.net.GeoService;
+import java.util.concurrent.TimeUnit;
+import javax.inject.Singleton;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -43,8 +40,7 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    OkHttpClient.Builder provideOkHttpClientBuilder(
-            HttpLoggingInterceptor httpLoggingInterceptor) {
+    OkHttpClient.Builder provideOkHttpClientBuilder(HttpLoggingInterceptor httpLoggingInterceptor) {
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
         clientBuilder.connectTimeout(timeout, TimeUnit.SECONDS);
         clientBuilder.readTimeout(timeout, TimeUnit.SECONDS);
@@ -68,9 +64,8 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    Retrofit provideRetrofit(Gson gson) {
-        return new Retrofit.Builder()
-                .baseUrl(baseUrl)
+    Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient) {
+        return new Retrofit.Builder().baseUrl(baseUrl).client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();

@@ -12,28 +12,28 @@ import rx.Scheduler;
  * Created by guiguegon on 12/11/2016.
  */
 
-public class GetLocationByNameUseCase extends UseCase<Location> {
+public class DeleteLocationUseCase extends UseCase<Boolean> {
 
     private LocationRepository locationRepository;
-    private String name;
+    private Location location;
 
     @Inject
-    public GetLocationByNameUseCase(Executor threadExecutor, Scheduler postExecutionThread,
+    public DeleteLocationUseCase(Executor threadExecutor, Scheduler postExecutionThread,
             LocationRepository locationRepository) {
         super(threadExecutor, postExecutionThread);
         this.locationRepository = locationRepository;
     }
 
-    public GetLocationByNameUseCase setName(String name) {
-        this.name = name;
+    public DeleteLocationUseCase setLocation(Location location) {
+        this.location = location;
         return this;
     }
 
     @Override
-    protected Observable<Location> buildUseCaseObservable() {
-        if (null == name) {
-            throw new IllegalStateException("name not set");
+    protected Observable<Boolean> buildUseCaseObservable() {
+        if (null == location) {
+            throw new IllegalStateException("location not set");
         }
-        return this.locationRepository.getLocationByName(name);
+        return this.locationRepository.deleteLocation(location);
     }
 }

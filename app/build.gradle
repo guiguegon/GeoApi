@@ -1,6 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 
+Properties props = new Properties()
+props.load(new FileInputStream("environments.properties"))
+props.each { prop -> project.ext.set(prop.key, prop.value) }
+
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
 
@@ -25,6 +29,10 @@ android {
     }
 
     buildTypes {
+        all {
+            buildConfigField 'String', 'API_URL', project.ENVIRONMENT_BASE_URL
+            buildConfigField 'String', 'API_USERNAME', project.ENVIRONMENT_USERNAME
+        }
         release {
             signingConfig signingConfigs.debug
             minifyEnabled false
