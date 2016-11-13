@@ -1,11 +1,17 @@
 package es.guiguegon.geoapi.di.modules;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import dagger.Module;
 import dagger.Provides;
+import es.guiguegon.geoapi.data.net.GeoService;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Singleton;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by guiguegon on 12/11/2016.
@@ -18,22 +24,23 @@ public class NetworkModule {
 
     private boolean debug;
     private int timeout;
+    private String baseUrl;
 
     private NetworkModule(Builder builder) {
         this.debug = builder.debug;
         this.timeout = builder.timeout;
+        this.baseUrl = builder.baseUrl;
     }
 
     @Provides
     @Singleton
-    public OkHttpClient provideOkHttpClient(OkHttpClient.Builder builder) {
+    OkHttpClient provideOkHttpClient(OkHttpClient.Builder builder) {
         return builder.build();
     }
 
     @Provides
     @Singleton
-    public OkHttpClient.Builder provideOkHttpClientBuilder(
-            HttpLoggingInterceptor httpLoggingInterceptor) {
+    OkHttpClient.Builder provideOkHttpClientBuilder(HttpLoggingInterceptor httpLoggingInterceptor) {
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
         clientBuilder.connectTimeout(timeout, TimeUnit.SECONDS);
         clientBuilder.readTimeout(timeout, TimeUnit.SECONDS);
@@ -45,13 +52,35 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    public HttpLoggingInterceptor provideOkHttpLogginClient() {
+    HttpLoggingInterceptor provideOkHttpLogginClient() {
         return new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
+    }
+
+    @Provides
+    @Singleton
+    Gson provideGson() {
+        return new GsonBuilder().create();
+    }
+
+    @Provides
+    @Singleton
+    Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient) {
+        return new Retrofit.Builder().baseUrl(baseUrl).client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+    }
+
+    @Provides
+    @Singleton
+    GeoService provideGeoService(Retrofit retrofit) {
+        return retrofit.create(GeoService.class);
     }
 
     public static class Builder {
 
         private boolean debug;
+        private String baseUrl;
         private int timeout = DEFAULT_TIMEOUT;
 
         public Builder() {
@@ -64,6 +93,11 @@ public class NetworkModule {
 
         public Builder setTimeout(int timeout) {
             this.timeout = timeout;
+            return this;
+        }
+
+        public Builder setBaseUrl(String baseUrl) {
+            this.baseUrl = baseUrl;
             return this;
         }
 
