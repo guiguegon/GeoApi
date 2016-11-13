@@ -73,13 +73,16 @@ dependencies {
     compile dependencies.supportDesign
     compile dependencies.supportAnnotations
     compile dependencies.supportRecyclerView
-    compile dependencies.supportCardView
     // Net stack
     compile dependencies.retrofit2
     compile dependencies.retrofit2Converter
     compile dependencies.retrofit2RxAdapter
     compile dependencies.okHttpLoggingInterceptor
     compile dependencies.gson
+    // Google Map
+    compile dependencies.playServicesMaps
+    compile dependencies.playServicesLocation
+    compile dependencies.googleMapUtils
 
     // Unit Test
     testCompile testDependencies.junit

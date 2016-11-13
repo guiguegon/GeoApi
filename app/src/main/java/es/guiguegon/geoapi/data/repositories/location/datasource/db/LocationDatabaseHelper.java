@@ -83,7 +83,8 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper implements DBDataba
         ContentValues values = new ContentValues();
         values.put(COLUMN_DATA, data);
         values.put(COLUMN_EXTERNAL_ID, externalId);
-        long insertId = database.insert(TABLE_NAME, null, values);
+        long insertId = database.insertWithOnConflict(TABLE_NAME, null, values,
+                SQLiteDatabase.CONFLICT_REPLACE);
         close();
         return insertId;
     }
