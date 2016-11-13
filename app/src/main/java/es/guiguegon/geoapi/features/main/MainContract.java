@@ -1,5 +1,6 @@
 package es.guiguegon.geoapi.features.main;
 
+import android.app.Activity;
 import es.guiguegon.geoapi.components.base.BaseContract;
 import es.guiguegon.geoapi.data.models.Location;
 
@@ -16,12 +17,18 @@ public interface MainContract extends BaseContract {
 
         void onQueryReceived(Location location);
 
-        void onLocationEnd();
+        void onLocationComplete();
+
+        void onQueryComplete();
     }
 
     interface ActionListener extends BaseContract.ActionListener {
         void getLocations();
 
         void queryLocationByName(String name);
+
+        void deleteLocation(Location location);
+
+        void navigateToLocation(Activity activity, Location location, int requestCode);
     }
 }

@@ -1,9 +1,8 @@
 package es.guiguegon.geoapi.data.repositories.location;
 
-import javax.inject.Inject;
-
 import es.guiguegon.geoapi.data.models.Location;
 import es.guiguegon.geoapi.data.repositories.location.datasource.LocationDataFactory;
+import javax.inject.Inject;
 import rx.Observable;
 
 /**
@@ -32,5 +31,10 @@ public class LocationDataRepository implements LocationRepository {
     @Override
     public Observable<Boolean> storeLocation(Location location) {
         return locationDataFactory.getDBDataStore().storeLocation(location);
+    }
+
+    @Override
+    public Observable<Boolean> deleteLocation(Location location) {
+        return locationDataFactory.getDBDataStore().deleteLocation(location);
     }
 }

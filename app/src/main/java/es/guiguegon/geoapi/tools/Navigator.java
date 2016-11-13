@@ -19,7 +19,8 @@ public class Navigator {
         this.context = context;
     }
 
-    public void navigateToLocation(Activity activity, Location location) {
-        activity.startActivity(LocationActivity.getCallingIntent(context, location));
+    public void navigateToLocation(Activity activity, Location location, int requestCode) {
+        activity.startActivityForResult(LocationActivity.getCallingIntent(context, location),
+                requestCode);
     }
 }

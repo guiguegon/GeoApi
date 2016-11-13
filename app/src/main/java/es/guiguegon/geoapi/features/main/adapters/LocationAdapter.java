@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,6 +21,7 @@ public class LocationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private List<Location> locations;
     private LocationItemListener locationItemListener;
+    private boolean cachedLocation;
 
     public LocationAdapter() {
         locations = new ArrayList<>();
@@ -34,6 +36,14 @@ public class LocationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         notifyItemInserted(locations.size());
     }
 
+    public void deleteLocation(Location location) {
+        int position = locations.indexOf(location);
+        if (position != -1) {
+            locations.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
     public void clear() {
         locations.clear();
         notifyDataSetChanged();
@@ -46,6 +56,11 @@ public class LocationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void setLocations(List<Location> locations) {
         this.locations = locations;
         notifyDataSetChanged();
+    }
+
+    public void setCachedLocation(boolean cachedLocation) {
+        this.cachedLocation = cachedLocation;
+        notifyItemRangeChanged(0, getItemCount());
     }
 
     @Override
@@ -67,6 +82,20 @@ public class LocationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 locationItemListener.onLocationItemClick(location);
             }
         });
+        holder.locationDelete.setOnClickListener(v -> {
+            if (null != locationItemListener) {
+                locationItemListener.onLocationDeleteClick(location);
+            }
+        });
+        manageDeleteImage(holder);
+    }
+
+    private void manageDeleteImage(LocationViewHolder holder) {
+        if (cachedLocation) {
+            holder.locationDelete.setVisibility(View.VISIBLE);
+        } else {
+            holder.locationDelete.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -80,12 +109,16 @@ public class LocationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public interface LocationItemListener {
         void onLocationItemClick(Location location);
+
+        void onLocationDeleteClick(Location location);
     }
 
     public class LocationViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.location_name)
         TextView locationName;
+        @BindView(R.id.location_delete)
+        ImageView locationDelete;
 
         public LocationViewHolder(View v) {
             super(v);

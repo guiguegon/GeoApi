@@ -4,7 +4,7 @@
     <!-- Main View -->
     <string name="main_location_search">Search</string>
     <string name="main_location_hint">Write a place …</string>
-    <string name="main_location_empty">You haven\'t search anything yet, take seat and start now!</string>
+    <string name="main_location_empty">Your historical is empty, take seat and search a city!</string>
 
     <!-- Network dialog -->
     <string name="ok_button">OK</string>

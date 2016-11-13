@@ -17,8 +17,7 @@ public class LocationDBDataStore implements LocationDataStore {
     private DBDatabaseHelper dbDatabaseHelper;
     private Serializer serializer;
 
-    public LocationDBDataStore(DBDatabaseHelper dbDatabaseHelper,
-                               GsonSerializer gsonSerializer) {
+    public LocationDBDataStore(DBDatabaseHelper dbDatabaseHelper, GsonSerializer gsonSerializer) {
         this.dbDatabaseHelper = dbDatabaseHelper;
         this.serializer = gsonSerializer;
     }
@@ -54,6 +53,19 @@ public class LocationDBDataStore implements LocationDataStore {
                     long rows = dbDatabaseHelper.storeData(location.getName(), serialized);
                     subscriber.onNext(rows > 0);
                 }
+                subscriber.onCompleted();
+            } catch (Exception e) {
+                subscriber.onError(e);
+            }
+        });
+    }
+
+    @Override
+    public Observable<Boolean> deleteLocation(Location location) {
+        return Observable.create(subscriber -> {
+            try {
+                long rows = dbDatabaseHelper.deleteData(location.getName());
+                subscriber.onNext(rows > 0);
                 subscriber.onCompleted();
             } catch (Exception e) {
                 subscriber.onError(e);

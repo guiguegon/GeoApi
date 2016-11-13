@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import es.guiguegon.geoapi.R;
 import es.guiguegon.geoapi.components.base.BaseFragment;
 import es.guiguegon.geoapi.data.models.Location;
+import es.guiguegon.geoapi.data.models.Weather;
 import es.guiguegon.geoapi.features.location.di.LocationModule;
 import es.guiguegon.geoapi.tools.NetworkManager;
+import java.util.List;
 import javax.inject.Inject;
 import timber.log.Timber;
 
@@ -49,6 +51,10 @@ public class LocationFragment extends BaseFragment implements LocationContract.V
         Timber.i("onViewCreated LocationFragment");
         locationPresenter.setView(this);
         if (savedInstanceState == null) {
+            location = getArguments().getParcelable(ARGUMENT_LOCATION);
+            if (null == location) {
+                throw new IllegalStateException("location null");
+            }
             locationPresenter.storeLocation(location);
             locationPresenter.getWeatherFromLocation(location);
         }
@@ -64,5 +70,13 @@ public class LocationFragment extends BaseFragment implements LocationContract.V
     public void onDestroyView() {
         super.onDestroyView();
         locationPresenter.clearView();
+    }
+
+    @Override
+    public void onError() {
+    }
+
+    @Override
+    public void onWeatherReceived(List<Weather> weather) {
     }
 }

@@ -1,5 +1,6 @@
 package es.guiguegon.geoapi.features.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -36,6 +37,7 @@ public class MainFragment extends BaseFragment
         implements MainContract.View, LocationAdapter.LocationItemListener {
 
     private final static String LOCATION_BUNDLE = "location_bundle";
+    private final static int SEE_LOCATION_CODE = 99;
 
     @Inject
     MainPresenter mainPresenter;
@@ -96,8 +98,8 @@ public class MainFragment extends BaseFragment
             if (null != locationList) {
                 locationAdapter.setLocations(locationList);
             }
+            onLocationComplete();
         }
-        onLocationEnd();
     }
 
     private void setUpSearch() {
@@ -146,6 +148,15 @@ public class MainFragment extends BaseFragment
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == SEE_LOCATION_CODE) {
+            locationAdapter.clear();
+            getLocationList();
+        }
+    }
+
     private boolean queryLocation() {
         Timber.i("[queryLocation]");
         try {
@@ -179,7 +190,8 @@ public class MainFragment extends BaseFragment
     }
 
     @Override
-    public void onLocationEnd() {
+    public void onLocationComplete() {
+        locationAdapter.setCachedLocation(true);
         if (locationAdapter.isEmpty()) {
             mainEmptyView.setVisibility(View.VISIBLE);
         }
@@ -191,7 +203,19 @@ public class MainFragment extends BaseFragment
     }
 
     @Override
+    public void onQueryComplete() {
+        locationAdapter.setCachedLocation(false);
+    }
+
+    @Override
     public void onLocationItemClick(Location location) {
-        mainPresenter.navigateToLocation(getActivity(), location);
+        mainPresenter.navigateToLocation(getActivity(), location, SEE_LOCATION_CODE);
+    }
+
+    @Override
+    public void onLocationDeleteClick(Location location) {
+        mainPresenter.deleteLocation(location);
+        locationAdapter.deleteLocation(location);
+        onLocationComplete();
     }
 }
